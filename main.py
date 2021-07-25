@@ -2,11 +2,9 @@
 import pandas as pd
 from sklearn.cluster import KMeans
 import statsmodels.formula.api as sm
-import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.spatial.distance import cdist
-from sklearn import metrics
 
 # Import Data
 data = pd.read_csv(r'return_data.csv', index_col=0)
@@ -70,7 +68,6 @@ industry.sort_index(inplace=True)
 results = pd.concat([betas, industry], axis=1)
 
 # Group by labels and look at distribution of industries among labels
-groups = pd.DataFrame()
 groups = results
 groups = groups.groupby("labels")["TRBC Economic Sector Name"].value_counts()
 print(groups)

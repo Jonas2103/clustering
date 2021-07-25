@@ -9,7 +9,6 @@ from scipy.spatial.distance import cdist
 # Import Data
 data = pd.read_csv(r'return_data.csv', index_col=0)
 data.columns = [x for x in data.columns.str.split('.').str[0]]
-print(data.columns)
 
 # Linear Regression of Stock returns on Index, Gas, Oil and Gold
 

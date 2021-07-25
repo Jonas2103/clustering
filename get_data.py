@@ -27,14 +27,20 @@ price.index = price.index.tz_localize(None)
 
 # Merge by Date, keep only where data for all
 data = pd.concat([price, natural_gas, oil, gold], axis=1, join='inner')
-print(data.tail())
+data.to_csv(r'level_data.csv')
 
+# Convert to daily returns
+for i in data.columns:
+    data["{}_chg".format(i)] = data[i].pct_change()
+
+return_data = data.iloc[:,int(data.shape[1]/2):]
+return_data.to_csv(r'return_data.csv')
 
 # Get Industry Classification
 industries = ek.get_data(list, 'TR.TRBCEconomicSector')[0]
 industries.index = list
 industries = industries.drop("Instrument", axis=1)
-
+industries.to_csv(r'industry.csv')
 
 
 
